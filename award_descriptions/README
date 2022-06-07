@@ -1,0 +1,24 @@
+I created a model to identify award descriptions which do not include the purpose of the award.
+
+I used USAspending advanced search to download all prime award loans worth over $1M. There were
+about 100,000 awards, but only around 300 unique award descriptions. I manually tagged each of the
+300 unique award descriptions as either including the purpose of the award or not.
+
+I used scikit-learn to build the model. First I split the data into train and test sets. Then I
+built a pipeline to extract features from the text, and use either KNN or a support vector
+classifier to make predictions.
+
+I tuned the pipeline’s hyper parameters using the training set, a tuning grid, and 5 fold cross
+validation to identify the best model for each type of classifier. I used the f1 score to compare
+models. I used the best model for each classifier to categorize the test set. I found that the SVC
+classifier slightly out-performed the KNN classifier.
+
+Overall, around 54% of award descriptions in the test set included the purpose of the award, while
+my best SVC model had an accuracy of 63%. My model correctly predicted 70% of award descriptions
+which did not include the purpose of the award.
+
+This model performed well in identifying awards that did not include the purpose of the award.
+However, I could improve the model further by using other classifiers such as a random forest or
+xgboost, or by using other variables available for awards, such as awarding agency, or CFDA program.
+I also manually tagged the awards myself, which I believe probably introduced some bias into the
+model. Ideally, this task would be performed by a third party.
